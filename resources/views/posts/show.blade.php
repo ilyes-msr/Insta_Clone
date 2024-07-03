@@ -11,9 +11,24 @@
         <div class="flex items-center p-5">
           <img src="{{$post->user->image}}" alt="{{$post->user->username}}"
                class="mr-5 h-10 w-10 rounded-full">
-          <a href="/{{$post->user->username}}" class="font-bold">
-            {{ $post->user->username }}
-          </a>
+          <div class="grow">
+            <a href="/{{$post->user->username}}" class="font-bold">
+              {{ $post->user->username }}
+            </a>
+          </div>
+
+          @if($post->user->id === auth()->id())
+            <a href="/p/{{$post->slug}}/edit"><i class='bx bx-message-square-edit text-xl' ></i></a>
+          @endif
+
+          <form action="/p/{{$post->slug}}/delete" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="return confirm('Are you sure?')">
+              <i class="bx bx-message-square-x ml-2 text-xl text-red-600"></i>
+            </button>
+          </form>
+
         </div>
       </div>
 
@@ -23,6 +38,13 @@
           <div>
             <a href="{{ $post->user->username }}" class="font-bold">{{ $post->user->username }}</a>
             {{ $post->description }}
+          </div>
+          <div class="ml-auto">
+            <form action="/p/{{$post->slug}}/delete" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit">X</button>
+            </form>
           </div>
         </div>
 
