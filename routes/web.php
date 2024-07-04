@@ -3,7 +3,12 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+
+require __DIR__.'/auth.php';
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,4 +30,5 @@ Route::controller(PostController::class)->middleware('auth')->group(function () 
 
 Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name('store_comment')->middleware('auth');
 
-require __DIR__.'/auth.php';
+Route::get('/{user:username}', [UserController::class, 'index'])->middleware('auth')->name('user_profile');
+

@@ -10,12 +10,6 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home_page')" :active="request()->routeIs('home_page')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -41,11 +35,14 @@
               @endauth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                      <img src="{{auth()->user()->image}}" alt="" class="w-10 h-10 rounded-full cursor-pointer">
+                      <div class="ml-3">
+                        <img src="{{auth()->user()->image}}" alt="" class="w-10 h-10 rounded-full cursor-pointer">
+
+                      </div>
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('user_profile', auth()->user()->username)">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -77,11 +74,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('home_page')" :active="request()->routeIs('home_page')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
