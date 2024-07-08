@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card my-4">
   <div class="card-header">
     <img src="{{$post->user->image}}" alt="" class="w-9 h-9 rounded-full mr-3">
     <a href="/{{$post->user->username}}" class="font-bold">{{$post->user->username}}</a>
@@ -8,6 +8,16 @@
     <div class="max-h-[35rem] overflow-hidden">
       <img src="/storage/{{$post->image}}" alt="{{$post->description}}" class="h-auto w-full object-cover">
     </div>
+    <div class="p-3">
+      <a href="/{{$post->slug}}/like">
+      @if($post->liked(auth()->user()))
+          <i class='bx bxs-heart mr-3 text-3xl text-red-600 cursor-pointer'></i>
+      @else
+          <i class='bx bx-heart mr-3 text-3xl cursor-pointer hover:text-gray-400'></i>
+        @endif
+      </a>
+    </div>
+
     <div class="p-3">
       <a href="/{{$post->user->username}}" class="font-bold mr-1">{{$post->user->username}}</a>
       {{$post->description}}
