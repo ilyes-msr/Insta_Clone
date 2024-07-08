@@ -33,7 +33,15 @@
               </div>
               <div class="flex flex-col grow">
                 <a href="/{{$suggested_user->username}}" class="font-bold">{{$suggested_user->username}}</a>
+                @if(auth()->user()->is_follower($suggested_user))
+                  <span class="text-xs text-gray-500">{{__('Follower')}}</span>
+                @endif
               </div>
+              @if(auth()->user()->is_pending($suggested_user))
+                <span class="text-gray-500 text-sm">{{ __('Pending') }}</span>
+              @else
+                <a href="/{{$suggested_user->username}}/follow" class="text-blue-500 font-bold">{{__('Follow')}}</a>
+              @endif
             </li>
           @endforeach
         </ul>

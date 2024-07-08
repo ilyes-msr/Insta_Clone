@@ -36,3 +36,5 @@ Route::get('/{user:username}/edit', [UserController::class, 'edit'])->middleware
 Route::patch('/{user:username}/update', [UserController::class, 'update'])->middleware('auth')->name('update_profile');
 
 Route::get('/{post:slug}/like', LikesController::class)->middleware('auth');
+Route::get('/{user:username}/follow', [UserController::class, 'follow'])->middleware('auth')->name('follow_user');
+Route::get('/{user:username}/unfollow', [UserController::class, 'unfollow'])->middleware('auth')->name('unfollow_user');
