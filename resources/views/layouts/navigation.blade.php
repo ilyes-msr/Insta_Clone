@@ -14,6 +14,16 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+              @guest
+                <div class="hidden md:flex md:items-center md:space-x-2">
+                  <div class="space-x-3 text-[1.6rem] ltr:mr-5 rtl:ml-5">
+                    <a href="/login"
+                       class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ltr:mr-2 rtl:ml-2">{{ __('Login') }}</a>
+                    <a href="/register"
+                       class="inline-flex items-center px-4 py-2 font-semibold text-xs uppercase tracking-widest">{{ __('Register') }}</a>
+                  </div>
+                </div>
+              @endguest
               @auth
                 <div class="flex items-center space-x-3">
                   <div class="space-x-3 text-[1.6rem] me-2 leading-5">
@@ -32,7 +42,7 @@
 
                   </div>
                 </div>
-              @endauth
+                <div class="hidden md:block">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                       <div class="ml-3">
@@ -58,6 +68,9 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                </div>
+                @endauth
+
             </div>
 
             <!-- Hamburger -->
@@ -77,7 +90,14 @@
 
 
         <!-- Responsive Settings Options -->
+
         <div class="pt-4 pb-1 border-t border-gray-200">
+          @guest
+            <x-responsive-nav-link :href="route('login')">{{ __('Login') }}</x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')">{{ __('Register') }}</x-responsive-nav-link>
+          @endguest
+
+          @auth
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -99,6 +119,7 @@
                     </x-responsive-nav-link>
                 </form>
             </div>
+            @endauth
         </div>
     </div>
 </nav>

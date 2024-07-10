@@ -16,8 +16,7 @@
               {{ $post->user->username }}
             </a>
           </div>
-
-          @if($post->user->id === auth()->id())
+          @can('update', $post)
             <a href="/p/{{$post->slug}}/edit"><i class='bx bx-message-square-edit text-xl' ></i></a>
             <form action="/p/{{$post->slug}}/delete" method="POST">
               @csrf
@@ -26,16 +25,19 @@
                 <i class="bx bx-message-square-x ml-2 text-xl text-red-600"></i>
               </button>
             </form>
-          @elseif(auth()->user()->is_following($post->user))
-            <a href="/{{$post->user->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
-              {{ __('Unfollow') }}
-            </a>
-          @else
-            <a href="/{{$post->user->username}}/follow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
-              {{__('Follow')}}
-            </a>
-          @endif
+          @endcan
 
+          @cannot('update', $post)
+            @if(auth()->user()->is_following($post->user))
+              <a href="/{{$post->user->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
+                {{ __('Unfollow') }}
+              </a>
+            @else
+              <a href="/{{$post->user->username}}/follow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
+                {{__('Follow')}}
+              </a>
+            @endif
+          @endcannot
         </div>
       </div>
 

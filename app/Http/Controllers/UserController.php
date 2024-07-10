@@ -17,6 +17,9 @@ class UserController extends Controller
 
   public function edit(User $user)
   {
+//    abort_if($user->id !== auth()->id(), 403, 'Unauthorized Request');
+//    abort_if(auth()->user()->cannot('edit-update-profile', $user), 403);
+//    $this->authorize('edit-update-profile', $user);
     return view('users.edit', compact('user'));
   }
 

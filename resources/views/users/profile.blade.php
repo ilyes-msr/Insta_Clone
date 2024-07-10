@@ -15,6 +15,7 @@
       <div class="text-3xl mb-3">
         {{$user->username}}
       </div>
+      @auth
       @if($user->id === auth()->id())
         <a href="/{{$user->username}}/edit" class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
           {{__('Edit Profile')}}
@@ -30,6 +31,13 @@
           {{__('Follow')}}
         </a>
       @endif
+      @endauth
+
+      @guest
+        <a href="/{{$user->username}}/follow" class="w-30 bg-gray-400 text-white px-1 py-1 rounded text-start self-start">
+          {{__('Follow')}}
+        </a>
+        @endguest
     </div>
 
     <div class="text-md mt-8 px-4 col-span-3 col-start-1 order-3 md:col-start-2 md:order-4 md:mt-0">
@@ -59,9 +67,7 @@
           </div>
           <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? 'following' : 'followings'}}</span>
         </li>
-
       </ul>
-
     </div>
   </div>
 
