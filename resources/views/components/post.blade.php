@@ -8,13 +8,11 @@
     <div class="max-h-[35rem] overflow-hidden">
       <img src="/storage/{{$post->image}}" alt="{{$post->description}}" class="h-auto w-full object-cover">
     </div>
-    <div class="p-3">
-      <a href="/{{$post->slug}}/like">
-      @if($post->liked(auth()->user()))
-          <i class='bx bxs-heart mr-3 text-3xl text-red-600 cursor-pointer'></i>
-      @else
-          <i class='bx bx-heart mr-3 text-3xl cursor-pointer hover:text-gray-400'></i>
-        @endif
+
+    <div class="p-3 flex flex-row">
+      <livewire:like :post="$post"/>
+      <a href="/p/{{$post->slug}}" class="grow">
+        <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
       </a>
     </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 
 

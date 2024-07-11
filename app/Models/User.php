@@ -48,7 +48,7 @@ class User extends Authenticatable
   public function suggested_users()
   {
     $following = auth()->user()->following()->wherePivot('confirmed', true)->get();
-    return User::all()->diff($following)->except(auth()->id())->shuffle()->take(50);
+    return User::all()->diff($following)->except(auth()->id())->shuffle()->take(5);
   }
 
   public function likes()

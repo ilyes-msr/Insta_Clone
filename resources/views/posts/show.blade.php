@@ -67,8 +67,16 @@
           @endforeach
         </div>
 
-
       </div>
+      <div class="p-3 flex flex-row border-t">
+        <livewire:like :post="$post"/>
+        <a class="grow" onclick="document.getElementById('comment_body').focus()">
+          <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
+        </a>
+      </div>
+
+      <livewire:likedby :post="$post" />
+
       <div class="border-t-2 p-5">
         <form action="/p/{{ $post->slug }}/comment" method="POST">
           @csrf
