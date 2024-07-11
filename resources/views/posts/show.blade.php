@@ -1,12 +1,9 @@
 <x-app-layout>
   <div class="h-screen md:flex md:flex-row">
-
     <div class="flex h-full items-center overflow-hidden bg-black md:w-7/12">
       <img class="h-auto w-full" src="/storage/{{$post->image}}" alt="{{ $post->description }}">
     </div>
-
     <div class="flex w-full flex-col bg-white md:w-5/12">
-
       <div class="border-b-2">
         <div class="flex items-center p-5">
           <img src="{{$post->user->image}}" alt="{{$post->user->username}}"
@@ -26,21 +23,11 @@
               </button>
             </form>
           @endcan
-
           @cannot('update', $post)
-            @if(auth()->user()->is_following($post->user))
-              <a href="/{{$post->user->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
-                {{ __('Unfollow') }}
-              </a>
-            @else
-              <a href="/{{$post->user->username}}/follow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center">
-                {{__('Follow')}}
-              </a>
-            @endif
+            <livewire:follow :post="$post" :userId="$post->user_id" classes="text-blue-500"/>
           @endcannot
         </div>
       </div>
-
       <div class="grow overflow-y-auto">
         <div class="flex items-start p-5">
           <img src="{{$post->user->image}}" class="mr-5 h-10 w-10 rounded-full">
@@ -49,7 +36,6 @@
             {{ $post->description }}
           </div>
         </div>
-
         <div>
           @foreach($post->comments as $comment)
             <div class="flex items-start px-5 py-2">
@@ -66,7 +52,6 @@
             </div>
           @endforeach
         </div>
-
       </div>
       <div class="p-3 flex flex-row border-t">
         <livewire:like :post="$post"/>
@@ -74,9 +59,7 @@
           <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
         </a>
       </div>
-
       <livewire:likedby :post="$post" />
-
       <div class="border-t-2 p-5">
         <form action="/p/{{ $post->slug }}/comment" method="POST">
           @csrf
@@ -87,6 +70,5 @@
         </form>
       </div>
     </div>
-
   </div>
 </x-app-layout>
