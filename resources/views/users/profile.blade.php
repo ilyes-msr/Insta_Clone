@@ -1,5 +1,4 @@
 <x-app-layout>
-
   <div
     class="{{ session('success') ? '' : 'hidden' }} w-50 p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800 absolute right-10 shadow shadow-neutral-200"
     role="alert">
@@ -20,8 +19,9 @@
         <a href="/{{$user->username}}/edit" class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
           {{__('Edit Profile')}}
         </a>
+      @else
+        <livewire:follow-button :userId="$user->id" classes="bg-blue-500 text-white"/>
       @endif
-        <livewire:follow :userId="$user->id" classes="bg-blue-500 text-white"/>
 
       @endauth
 
@@ -29,7 +29,7 @@
         <a href="/{{$user->username}}/follow" class="w-30 bg-gray-400 text-white px-1 py-1 rounded text-start self-start">
           {{__('Follow')}}
         </a>
-        @endguest
+      @endguest
     </div>
 
     <div class="text-md mt-8 px-4 col-span-3 col-start-1 order-3 md:col-start-2 md:order-4 md:mt-0">
@@ -39,6 +39,7 @@
 
     <div class="col-span-4 my-5 py-2 border-y border-y-neutral-200 order-4 md:order-3 md:border-none md:px-4 md:col-start-2">
       <ul class="text-md flex flex-row justify-around md:justify-start md:space-x-10 md:text-xl">
+
         <li class="flex flex-col md:flex-row text-center">
           <div class="md:mr-1 font-bold md:font-normal">
             {{$user->posts->count()}}
@@ -46,23 +47,15 @@
           <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? 'posts' : 'post'}}</span>
         </li>
 
-        <li class="flex flex-col md:flex-row text-center">
-          <div class="md:mr-1 font-bold md:font-normal">
-            {{$user->followers->count()}}
-          </div>
-          <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? 'follower' : 'followers'}}</span>
-        </li>
+        <livewire:followers :userId="$user->id"/>
 
-        <li class="flex flex-col md:flex-row text-center">
-          <div class="md:mr-1 font-bold md:font-normal">
-            {{$user->following->count()}}
-          </div>
-          <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? 'following' : 'followings'}}</span>
-        </li>
+        <livewire:following :userId="$user->id"/>
+
       </ul>
     </div>
   </div>
 
+  @auth
   @if($user->posts->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))
     <div class="grid grid-cols-3 gap-1 my-5">
       @foreach($user->posts as $post)
@@ -71,6 +64,7 @@
         </a>
       @endforeach
     </div>
+    @endauth
   @else
     <div class="w-full text-center mt-20">
       @if($user->private_account == true and $user->id != auth()->id())
