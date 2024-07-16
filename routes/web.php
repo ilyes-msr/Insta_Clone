@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
 
+Route::get('/phpinfo', function() {
+  return phpinfo();
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,3 +43,4 @@ Route::patch('/{user:username}/update', [UserController::class, 'update'])->midd
 Route::get('/{post:slug}/like', LikesController::class)->middleware('auth');
 Route::get('/{user:username}/follow', [UserController::class, 'follow'])->middleware('auth')->name('follow_user');
 Route::get('/{user:username}/unfollow', [UserController::class, 'unfollow'])->middleware('auth')->name('unfollow_user');
+

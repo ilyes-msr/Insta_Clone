@@ -10,7 +10,7 @@ class PostsList extends Component
 
   public function getPostsProperty()
   {
-    $ids = auth()->user()->followers()->wherePivot('confirmed', true)->get()->pluck('id');
+    $ids = auth()->user()->following()->wherePivot('confirmed', true)->get()->pluck('id');
     return Post::whereIn('user_id', $ids)->latest()->get();
   }
 

@@ -42,10 +42,10 @@
               {!! url()->current() == route('explore') ? '<i class="bx bxs-compass"></i>' : '<i class="bx bx-compass"></i>' !!}
             </a>
 
-            {{-- Create Post --}}
-            <button onclick="Livewire.emit('openModal', 'create-post-modal')">
+            <button onclick="Livewire.dispatch('openModal', {component: 'create-post-modal'})">
               <i class="bx bx-message-square-add text-[1.6rem]"></i>
             </button>
+
             <div class="hidden md:block">
               <x-dropdown align="right" width="96">
                 <x-slot name="trigger">
@@ -123,7 +123,7 @@
           <x-responsive-nav-link :href="route('home_page')">{{ __('Home') }}</x-responsive-nav-link>
           <x-responsive-nav-link :href="route('explore')">{{ __('Explore') }}</x-responsive-nav-link>
           <x-responsive-nav-link class="cursor-pointer"
-                                 onclick="Livewire.emit('openModal', 'create-post-modal')">{{ __('New Post') }}</x-responsive-nav-link>
+                                 onclick="Livewire.dispatch('openModal', 'create-post-modal')">{{ __('New Post') }}</x-responsive-nav-link>
           <x-responsive-nav-link :href="route('user_profile', auth()->user())">{{ __('Profile') }}</x-responsive-nav-link>
           <!-- Authentication -->
           <form method="POST" action="{{ route('logout') }}">

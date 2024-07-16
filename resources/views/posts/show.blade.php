@@ -14,7 +14,9 @@
             </a>
           </div>
           @can('update', $post)
-            <a href="/p/{{$post->slug}}/edit"><i class='bx bx-message-square-edit text-xl' ></i></a>
+          <button onclick="Livewire.dispatch('openModal', { component: 'edit-post-modal', arguments: { id: {{$post->id}} } })">
+             <i class='bx bx-message-square-edit text-xl'></i>
+          </button>
             <form action="/p/{{$post->slug}}/delete" method="POST">
               @csrf
               @method('DELETE')
