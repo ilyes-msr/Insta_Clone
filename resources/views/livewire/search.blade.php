@@ -4,10 +4,11 @@
          placeholder="{{ __('Search...') }}"
          autocomplete="off"/>
   @if(!empty($searchInput))
-    <button class="absolute right-3" wire:click="clear">
+    <button class="absolute ltr:right-3 rtl:left-3" wire:click="clear">
       <i class="bx bx-x-circle text-gray-400"></i>
     </button>
   @endif
+
   <div>
     @if (!empty($results) and !empty($searchInput))
       <ul class="absolute w-56 md:w-64 lg:w-96 bg-white p-2 border border-neutral-300 z-10 rounded-lg shadow-xl left-0 top-10">
@@ -17,7 +18,7 @@
               wire:click="goto('{{ $result->username }}')">
             <div>
               <img src="{{ $result->image }}"
-                   class="w-10 h-10 mr-2 ml-2 rounded-full border border-neutral-300">
+                   class="w-10 h-10 ltr:mr-2 rtl:ml-2 rounded-full border border-neutral-300">
             </div>
             <div class="flex flex-col grow">
               <div class="font-bold">
@@ -33,7 +34,9 @@
             {{ __('There are no results') }}
           </li>
         @endforelse
+
       </ul>
     @endif
   </div>
+
 </div>

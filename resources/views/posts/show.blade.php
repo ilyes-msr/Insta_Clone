@@ -7,7 +7,7 @@
       <div class="border-b-2">
         <div class="flex items-center p-5">
           <img src="{{$post->user->image}}" alt="{{$post->user->username}}"
-               class="mr-5 h-10 w-10 rounded-full">
+               class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
           <div class="grow">
             <a href="/{{$post->user->username}}" class="font-bold">
               {{ $post->user->username }}
@@ -32,7 +32,7 @@
       </div>
       <div class="grow overflow-y-auto">
         <div class="flex items-start p-5">
-          <img src="{{$post->user->image}}" class="mr-5 h-10 w-10 rounded-full">
+          <img src="{{$post->user->image}}" class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
           <div>
             <a href="{{ $post->user->username }}" class="font-bold">{{ $post->user->username }}</a>
             {{ $post->description }}
@@ -41,14 +41,16 @@
         <div>
           @foreach($post->comments as $comment)
             <div class="flex items-start px-5 py-2">
-              <img src="{{ $comment->owner->image }}" alt="" class="h-100 mr-5 w-10 rounded-full">
+              <img src="{{ $comment->owner->image }}" alt="" class="h-100 ltr:mr-5 rtl:ml-5 w-10 rounded-full">
               <div class="flex flex-col">
-                <div>
-                  <a href="/{{ $comment->owner->username }}" class="font-bold">{{ $comment->owner->username }}</a>
-                  {{$comment->body}}
+                <div style="direction: rtl">
+                  <a href="/{{ $comment->owner->username }}" class="font-bold">
+                    {{ $comment->owner->username }}
+                  </a>
+                  <span class="text-gray-500">{{$comment->body}}</span>
                 </div>
                 <div class="mt-1 text-sm font-bold text-gray-400">
-                  {{ $comment->created_at->diffForHumans(null, true, true) }}
+                  {{ $comment->created_at->diffForHumans() }}
                 </div>
               </div>
             </div>
@@ -67,7 +69,7 @@
           @csrf
           <div class="flex flex-row">
             <textarea name="body" id="comment_body" placeholder="Add a comment.." class="h-5 grow resize-none overflow-hidden border-none bg-none p-0 placeholder-gray-400 outline-0 focus:ring-0" ></textarea>
-            <button class="ml-5 border-none bg-white text-blue-500" type="submit">Post</button>
+            <button class="ml-5 border-none bg-white text-blue-500" type="submit">{{__('Post')}}</button>
           </div>
         </form>
       </div>

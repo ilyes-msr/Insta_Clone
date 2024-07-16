@@ -11,6 +11,11 @@ class FollowingModal extends ModalComponent
   public $userId;
   protected $user;
 
+  public static function modalMaxWidth(): string
+  {
+    return 'sm';
+  }
+
   public function getFollowingListProperty()
   {
     $this->user = User::find($this->userId);

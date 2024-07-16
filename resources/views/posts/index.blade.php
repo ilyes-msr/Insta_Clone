@@ -5,7 +5,7 @@
 
     <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
       <div class="flex flex-row text-sm">
-        <div class="mr-5">
+        <div class="rtl:ml-5 ltr:mr-5">
           <a href="/{{ auth()->user()->username }}">
             <img src="{{auth()->user()->image}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
           </a>
@@ -20,7 +20,7 @@
         <ul>
           @foreach($suggested_users as $suggested_user)
             <li class="flex flex-row my-5 text-sm justify-items-center">
-              <div class="mr-5">
+              <div class="rtl:ml-5 ltr:mr-5">
                 <a href="/{{$suggested_user->username}}">
                   <img src="{{$suggested_user->image}}" alt="" class="rounded-full h-9 w-9 border-gray-300">
                 </a>

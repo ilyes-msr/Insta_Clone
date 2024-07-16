@@ -38,13 +38,13 @@
     </div>
 
     <div class="col-span-4 my-5 py-2 border-y border-y-neutral-200 order-4 md:order-3 md:border-none md:px-4 md:col-start-2">
-      <ul class="text-md flex flex-row justify-around md:justify-start md:space-x-10 md:text-xl">
+      <ul class="text-md flex flex-row justify-around md:justify-start md:gap-5 md:text-xl">
 
-        <li class="flex flex-col md:flex-row text-center">
-          <div class="md:mr-1 font-bold md:font-normal">
+        <li class="flex flex-col md:flex-row text-center ">
+          <div class="ltr:md:mr-1 rtl:md:ml-1 font-bold md:font-normal">
             {{$user->posts->count()}}
           </div>
-          <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? 'posts' : 'post'}}</span>
+          <span class="text-neutral-500 md:text-black">{{$user->posts->count() > 1 ? __('posts') : __('post')}}</span>
         </li>
 
         <livewire:followers :userId="$user->id"/>
