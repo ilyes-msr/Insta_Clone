@@ -24,7 +24,10 @@ class Search extends Component
   public function render()
   {
     $this->results = [];
-    $this->results = User::where('username', 'LIKE', '%' . $this->searchInput . '%')->get(['id', 'name', 'username', 'image']);
+    $this->results =  User::where(function($query) {
+      $query->where('username', 'LIKE', '%' . $this->searchInput . '%')
+        ->orWhere('name', 'LIKE', '%' . $this->searchInput . '%');
+    })->get(['id', 'name', 'username', 'image']);
     return view('livewire.search', [
       'results' => $this->results
     ]);
