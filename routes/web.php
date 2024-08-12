@@ -13,6 +13,7 @@ require __DIR__.'/auth.php';
 Route::get('/phpinfo', function() {
   return phpinfo();
 });
+
 Route::get('/lang-ar', function () {
   session()->put('lang', 'ar');
   return back();
@@ -22,7 +23,6 @@ Route::get('/lang-en', function () {
   session()->put('lang', 'en');
   return back();
 });
-
 
 Route::middleware(['auth', 'lang'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

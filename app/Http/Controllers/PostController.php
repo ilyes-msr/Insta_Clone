@@ -20,12 +20,10 @@ class PostController extends Controller
     return view('posts.index', compact(['posts', 'suggested_users']));
   }
 
-
   public function create()
   {
     return view('posts.create');
   }
-
 
   public function store(Request $request)
   {
@@ -84,6 +82,7 @@ class PostController extends Controller
   {
     $posts = Post::whereRelation('user', 'private_account', '=', 0)
         ->whereNot('user_id', auth()->id())
+        ->where('location', auth()->user()->location)
         ->simplePaginate(12);
     return view('posts.explore', compact('posts'));
   }
